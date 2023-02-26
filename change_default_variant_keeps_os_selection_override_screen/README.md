@@ -1,6 +1,6 @@
 # Restart to the same OS with Windows Boot Manager<br><sub><sub><sub> utilizing `bcdedit /default "{current}"`</sub></sub></sub>
 
-This guide is for people with Windows multi boot, who want to be able to restart their computer from any place - be it Start Menu, Power Menu, Lock Screen, command prompt, etc - and make it always boot into the same Windows OS on which the restart was initiated. This is achieved by using the ***WBM (Windows Boot Manager)*** and the `bcdedit /default "{current}"` command. Additionally, it doesn't skip the OS selection screen, so it can be easily overridden when a use wants to reboot to different OS. This solves the issue of having to seat in front of a computer, when clicking update&shutdown from the not-default OS. It will `install updates > restart > finish updating >  shutdown`, instead of how it was - `install updates > restart > boot to the default OS, so not the one that is being updated > wait on the login screen of the default OS`. 
+This guide is for people with Windows multi boot, who want to be able to restart their computer from any place - be it Start Menu, Power Menu, Lock Screen, command prompt, etc - and make it always boot into the same Windows OS on which the restart was initiated. This is achieved by using the ***WBM (Windows Boot Manager)*** and the `bcdedit /default "{current}"` command. Additionally, it doesn't skip the OS selection screen, so it can be easily overridden when a use wants to reboot to different OS. This solves the issue of having to sit in front of a computer, when clicking update&shutdown from the not-default OS. It will `install updates > restart > finish updating >  shutdown`, instead of how it was - `install updates > restart > boot to the default OS, so not the one that is being updated > wait on the login screen of the default OS`. 
 
 ## How to setup:
 ---
@@ -42,7 +42,7 @@ This way allows to reboot to the same OS and keeps the os selection override scr
     These instructions are only applicable for boot entries that are booted using the only one WBM - so basically Windows OSes. If you aren't using WBM, you have 2 options:
         
     - Set the `BOOTNEXT` EFI variable to the currently booted OS, which takes higher priority than the currently installed boot manager of your choice (but is very not pleasant to do from Windows without writing come c++/c# code). 
-
+        
     - Use a special way of communicating with your boot manager of choice, like in this guide with the Windows one using `bcdedit`. 
 
 

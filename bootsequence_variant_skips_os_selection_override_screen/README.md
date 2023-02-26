@@ -1,6 +1,6 @@
 # Restart to the same OS with Windows Boot Manager<br><sub><sub><sub> utilizing `bcdedit /bootcequence "{current}"`</sub></sub></sub>
 
-This guide is for people with Windows multi boot, who want to be able to restart their computer from any place - be it Start Menu, Power Menu, Lock Screen, command prompt, etc - and make it always boot into the same Windows OS on which the restart was initiated. This is achieved by using the `Windows Boot Manager` and the `bcdedit /bootsequence "{current}"` command. It skips the OS selection screen. This solves the issue of having to seat in front of a computer, when clicking update&shutdown from the not-default OS. It will `install updates > restart > finish updating >  shutdown`, instead of how it was - `install updates > restart > boot to the default OS, so not the one that is being updated > wait on the login screen of the default OS`. 
+This guide is for people with Windows multi boot, who want to be able to restart their computer from any place - be it Start Menu, Power Menu, Lock Screen, command prompt, etc - and make it always boot into the same Windows OS on which the restart was initiated. This is achieved by using the ***WBM (Windows Boot Manager)*** and the `bcdedit /bootsequence "{current}"` command. It skips the OS selection screen. This solves the issue of having to sit in front of a computer, when clicking update&shutdown from the not-default OS. It will `install updates > restart > finish updating >  shutdown`, instead of how it was - `install updates > restart > boot to the default OS, so not the one that is being updated > wait on the login screen of the default OS`. 
 
 ## How to setup:
 ---
@@ -37,7 +37,7 @@ For example, if you are using a polish localization, you will need to change the
 19. Navigate to the `Settings` tab and again make sure every checkbox is unchecked.
 20. Click `OK` to close the `Create Task` window and save changes.
 21. If prompted for credentials, enter your credentials for running this task and click `OK`.
-22. You are done 🎉. You can now restart your from any place - be it Start Menu, Power Menu, Lock Screen, command prompt, etc. and it will always boot into the same Windows OS on which you initiated the restart.
+22. You are done 🎉. You can now restart your computer from any place - be it Start Menu, Power Menu, Lock Screen, command prompt, etc. and it will always boot into the same Windows OS on which you initiated the restart.
 
 
 ## How to uninstall:
@@ -52,7 +52,7 @@ For example, if you are using a polish localization, you will need to change the
     To make sure that the `Event Viewer` is able to log the event that tells about the restart. It's needed in the step 10 of the setup instructions, where we are filtering for the event that tells us what string to use in the XML code.
 2. **It doesn't work with linux/grub/refind etc. What now?**
     
-    These instructions are only applicable for boot entries that are booted using the only one Windows Boot Manager - so basically only Windows OSes. If you aren't using Windows Boot Manager, you have 2 options:
+    These instructions are only applicable for boot entries that are booted using the only one WBM - so basically Windows OSes. If you aren't using WBM, you have 2 options:
         
     - Set the `BOOTNEXT` EFI variable to the currently booted OS, which takes higher priority than the currently installed boot manager of your choice (but is very not pleasant to do from Windows without writing come c++/c# code). 
         
