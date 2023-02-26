@@ -7,36 +7,36 @@ SETLOCAL EnableDelayedExpansion
 chcp 65001 > NUL
 
 @REM check if the script was engaged
-echo [	%~n0%~x0	]	[	%time%	] revert_init >> "%~dp0log.txt"
-echo [	%~n0%~x0	]	[	%time%	] $~dp0 %~dp0 >> "%~dp0log.txt"
+echo [	%~n0%~x0	] [	%time%	] revert_init >> "%~dp0log.txt"
+echo [	%~n0%~x0	] [	%time%	] "~dp0 - %~dp0" >> "%~dp0log.txt"
 set /p engaged=<"%~dp0engaged.txt"
-echo [	%~n0%~x0	]	[	%time%	] engaged - %engaged% >> "%~dp0log.txt"
+echo [	%~n0%~x0	] [	%time%	] engaged - %engaged% >> "%~dp0log.txt"
 @REM echo "engaged - %engaged%"
 if %engaged%==true (
    @REM disengage the script
    echo false > "%~dp0engaged.txt" 
-   echo [	%~n0%~x0	]	[	%time%	] set false to engaged >> "%~dp0log.txt"
+   echo [	%~n0%~x0	] [	%time%	] set false to engaged >> "%~dp0log.txt"
 
    @REM read the old "{current}" GUID from the file
    set /p old_current_OS_from_file=<"%~dp0old_current_OS.txt" >> "%~dp0log.txt" 2>&1
    @REM echo "old_current_OS_from_file - %old_current_OS_from_file%"
-   echo [	%~n0%~x0	]	[	%time%	] "old_current_OS_from_file - !old_current_OS_from_file!" >> "%~dp0log.txt"
+   echo [	%~n0%~x0	] [	%time%	] "old_current_OS_from_file - !old_current_OS_from_file!" >> "%~dp0log.txt"
 
    @REM read the default OS from bcdedit (can be changed in Windows Boot Manager os selection screen or in msconfig when booted)
-   for /f "tokens=2" %%i in ('bcdedit /enum /v ^| findstr /i "default"') do set default_OS_from_bcdedit=%%i >> "%~dp0log.txt" 2>&1
+   for /f "tokens=2" %%i in ('bcdedit /enum /v ^| find /i "default"') do set default_OS_from_bcdedit=%%i >> "%~dp0log.txt" 2>&1
    @REM echo "default_OS_from_bcdedit - %default_OS_from_bcdedit%"
-   echo [	%~n0%~x0	]	[	%time%	] "default_OS_from_bcdedit - !default_OS_from_bcdedit!" >> "%~dp0log.txt" 
+   echo [	%~n0%~x0	] [	%time%	] "default_OS_from_bcdedit - !default_OS_from_bcdedit!" >> "%~dp0log.txt" 
 
    @REM read the default OS from the file
    set /p default_OS_from_file=<"%~dp0default_OS.txt" >> "%~dp0log.txt" 2>&1
    @REM echo "default_OS_from_file - %default_OS_from_file%"
-   echo [	%~n0%~x0	]	[	%time%	] "default_OS_from_file - !default_OS_from_file!">> "%~dp0log.txt"
+   echo [	%~n0%~x0	] [	%time%	] "default_OS_from_file - !default_OS_from_file!">> "%~dp0log.txt"
 
    if !old_current_OS_from_file!==!default_OS_from_bcdedit! (
-      echo [	%~n0%~x0	]	[	%time%	] "old_current_OS_from_file==default_OS_from_bcdedit - true">> "%~dp0log.txt"
+      echo [	%~n0%~x0	] [	%time%	] "old_current_OS_from_file==default_OS_from_bcdedit - true">> "%~dp0log.txt"
 
       @REM revert default OS to the one saved in the file and redirect the output to log formatted file nicely
-      for /f "usebackq tokens=*" %%a in (`bcdedit /default !default_OS_from_file! 2^>^&1`) do echo [	%~n0%~x0	]	[	%time%	] %%a >> "%~dp0log.txt" 2>&1
+      for /f "tokens=*" %%a in ('bcdedit /default !default_OS_from_file! 2^>^&1') do echo [	%~n0%~x0	] [	%time%	] %%a >> "%~dp0log.txt" 2>&1
       @REM echo "old_current_OS_from_file==default_OS_from_bcdedit - true"
 
    ) 
@@ -47,4 +47,4 @@ if %engaged%==true (
    @REM )
    
 )
-echo [	%~n0%~x0	]	[	%time%	] ------------------ >> "%~dp0log.txt"
+echo [	%~n0%~x0	] [	%time%	] ================== >> "%~dp0log.txt"
